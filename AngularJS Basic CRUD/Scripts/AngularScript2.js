@@ -90,6 +90,9 @@ app.controller("myController", function ($scope, $http) {
                 //console.log(res.data);
                 alert(res.data);
                 location.reload();
+
+
+
             })
                 .catch(function (error) {
                     alert(error);
@@ -105,6 +108,8 @@ app.controller("myController", function ($scope, $http) {
         $scope.stateList = {};
         $scope.stateList = list.data;
         //console.log(list.data);
+
+
     }, function () {
         alert('failed')
     });
@@ -118,6 +123,8 @@ app.controller("myController", function ($scope, $http) {
 
     function BindCities() {
         var obj = {
+
+
             StateId: $scope.StateId
         }
         $http.post('/Home/BindCity', obj).then(function (list) {

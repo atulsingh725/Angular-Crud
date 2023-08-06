@@ -69,6 +69,8 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
+
+
                         <th scope="col">SrNo.</th>
                         <th scope="col">Name</th>
                         <th scope="col">Mobile</th>
@@ -84,12 +86,17 @@
 
                         <th scope="row">{{$index + 1}}</th>
                         <td>{{item.Name}}</td>
+
+
+
                         <td>{{item.Mobile}}</td>
                         <td>
                             <img ng-src="~/Content/Uploads/{{item.PicUrl}}" alt="Pic" style="height:50px; width:50px;">
                         </td>
                         <td>{{item.State}}</td>
                         <td>{{item.City}}</td>
+
+
                         <td>{{item.EntryDate}}</td>
                         <td>
                             <input type="button" value="Edit" ng-click="EditData(item.ID,item.Name,item.Mobile,item.StateId,item.CityId,item.PicUrl)" class="btn btn-success">
