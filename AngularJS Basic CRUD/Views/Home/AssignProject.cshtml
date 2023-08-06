@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewBag.Title = "AssignProject";
+}
+
+<script src="~/Scripts/ProjectScript.js"></script>
+<div class="container-fluid" ng-app="ProjectApp" ng-controller="ProjectController">
+    <h3>AssignProject</h3>
+    <div class="row">
+        <div class="col-sm-5">
+            <form name="myForm" id="form">
+                <div class="row">
+                    <div class="mb-3" ng-show="showDiv">
+                        <label class="form-label">Id</label>
+                        <input type="text" readonly ng-model="ID" class="form-control">
+
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Employee</label>
+                        <select ng-model="EmpId" id="EmpId" class="form-control">
+                            <option value="">--Select Employee--</option>
+                            <option data-ng-repeat="item in EmpList" value="{{item.EmpId}}">{{item.Name}}</option>
+                        </select>
+
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Project Name</label>
+                        <input type="text" onkeydown="onlyAlphha(event)" ng-model="Project" id="Project" class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="button" ng-model="btn" value="{{btntext}}" ng-click="SaveData()" class="btn btn-primary">
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+        <div class="col-sm-7">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">SrNo.</th>
+                        <th scope="col">Employee Name</th>
+                        <th scope="col">Project Name</th>
+                        <th scope="col">Assign Date</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-ng-repeat="item in ProjectList">
+
+            <th scope="row">{{$index + 1}}</th>
+            <td>{{item.Name}}</td>
+            <td>{{item.Project}}</td>
+            <td>{{item.EntryDate}}</td>
+            <td>
+                @*<input type="button" value="Edit" ng-click="EditData(item.ID,item.Name,item.Project,item.EmpId)" class="btn btn-success">*@
+                <input type="button" value="Delete" ng-click="DeleteData(item.ID)" class="btn btn-danger">
+            </td>
+        </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,104 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<script src="~/Scripts/AngularScript2.js"></script>
+<div class="container-fluid" ng-app="Application" ng-controller="myController">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Register Employee</h3>
+            <form name="myForm" id="form" novalidate enctype="multipart/form-data">
+                <div class="row">
+
+                    <div class="mb-3" ng-show="showPicDiv">
+                        <img ng-src="~/Content/Uploads/{{imageUrl}}" style="width: 100px; height: 100px;" >
+                    </div>
+
+
+                    <div class="mb-3" ng-show="showDiv">
+                        <label class="form-label">Id</label>
+                        <input type="text" readonly ng-model="ID" class="form-control" required>
+
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input type="text" onkeydown="onlyAlphha(event)" ng-model="Name" id="txtName" class="form-control" ng-required="true">
+                        
+                        @*<span style="color:red" ng-show="myForm.Name.$dirty && myForm.Name.$invalid">
+            <i ng-show="myForm.Name.$error.required">Name is required</i>
+        </span>*@
+
+                        @*<span ng-show="myForm.Name.$touched && myForm.Name.$error.required">Name is required.</span>*@
+
+
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Mobile</label>
+                        <input type="text" ng-model="Mobile" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" id="phone" maxlength="10" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Photo</label>
+                        <input name="profileImage" id="File" type="file" class="upload"
+                               onchange="angular.element(this).scope().LoadFileData(this.files)" accept="image/*">
+
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">State</label>
+                        <select ng-model="StateId" id="StateId" ng-change="BindCity()" class="form-control">
+                            <option value="">--Select State--</option>
+                            <option data-ng-repeat="item in stateList" value="{{item.StateId}}">{{item.State}}</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">City</label>
+                        <select ng-model="CityId" id="CityId" convert-to-number class="form-control">
+                            <option value="">--Select City--</option>
+                            <option data-ng-repeat="item in cityList" value="{{item.CityId}}">{{item.City}}</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <input type="button" id="savebtn" @*ng-disabled="myForm.$invalid"*@ ng-model="btn" value="{{btntext}}" ng-click="SaveData()" class="btn btn-primary">
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+        <div class="col-sm-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">SrNo.</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Mobile</th>
+                        <th scope="col">Pic</th>
+                        <th scope="col">State</th>
+                        <th scope="col">City</th>
+                        <th scope="col">Entry Date</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-ng-repeat="item in EmpData">
+
+                        <th scope="row">{{$index + 1}}</th>
+                        <td>{{item.Name}}</td>
+                        <td>{{item.Mobile}}</td>
+                        <td>
+                            <img ng-src="~/Content/Uploads/{{item.PicUrl}}" alt="Pic" style="height:50px; width:50px;">
+                        </td>
+                        <td>{{item.State}}</td>
+                        <td>{{item.City}}</td>
+                        <td>{{item.EntryDate}}</td>
+                        <td>
+                            <input type="button" value="Edit" ng-click="EditData(item.ID,item.Name,item.Mobile,item.StateId,item.CityId,item.PicUrl)" class="btn btn-success">
+                            <input type="button" value="Delete" ng-click="DeleteData(item.ID)" class="btn btn-danger">
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
